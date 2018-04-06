@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet,Image,Dimensions,KeyboardAvoidingView } from 'react-native';
 import { Container, Item, Input, Header, Body, Content, Title, Button, Text , Label, Icon } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
+import { Actions, ActionConst } from 'react-native-router-flux';
 const ScreenHeight = Dimensions.get("window").height;
 const ScreenWidth = Dimensions.get("window").width;
 let buttonDisabled= true;
@@ -66,7 +67,7 @@ class SimpleForm extends Component {
     }
     submitted() {
         if(this.state.mail == 'Ayz@123.com' && this.state.pwd == 12345678 ){
-            console.log('Logged In')
+            Actions.reset("items")
         }
     }
 
@@ -113,11 +114,7 @@ class SimpleForm extends Component {
             behavior="padding"
           >
             <Container>
-                <Header>
-                    <Body>
-                        <Title>Redux Form</Title>
-                    </Body>
-                </Header>
+                {/* <Button onPress={Actions.home}></Button> */}
                 <Container style={{
                     flex: 1,
                     flexDirection: 'row',
@@ -133,7 +130,7 @@ class SimpleForm extends Component {
                     <Content padder>
                         <Field name="email" label="Enter email" type="email" component={this.renderInput} value={this.state.name} />
                         <Field name="pwd" label="Enter password" type="password" component={this.renderInput} value={this.state.pwd} />
-                        <Button style={{marginTop:'5%'}} block primary onPress={this.submitted} disabled={buttonDisabled == true ? true : false}>
+                        <Button style={{marginTop:'5%'}} block primary onPress={this.submitted} disabled={buttonDisabled == true ? true : false} success={buttonDisabled == true ? false : true}>
                             <Text>Submit</Text>
                         </Button>
                     </Content>
